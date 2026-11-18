@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Astrological Remedies Library</title>
+<meta name="description" content="Find astrological remedies by need, planet or remedy type — complete text of two AIFAS remedy books.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪐</text></svg>">
+<style>
+:root{--bg:#faf7f2;--card:#fff;--ink:#2a2430;--mute:#6f6677;--line:#e7e0d6;--accent:#7a3e9d;--accent2:#c8841a;--chip:#f1e9f7;--hit:#fff1b8;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#17141b;--card:#211d27;--ink:#ece6f1;--mute:#a69cb0;--line:#38303f;--accent:#c9a0e6;--accent2:#e8b14f;--chip:#2e2638;--hit:#5a4a12;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#17141b;--card:#211d27;--ink:#ece6f1;--mute:#a69cb0;--line:#38303f;--accent:#c9a0e6;--accent2:#e8b14f;--chip:#2e2638;--hit:#5a4a12;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Georgia,'Times New Roman',serif;font-size:var(--fs,16px)}
+button,input{font:inherit;color:inherit}
+header{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+header h1{margin:0;font-size:1.1rem;color:var(--accent);white-space:nowrap}
+nav{display:flex;gap:4px}
+nav button{border:0;background:none;padding:6px 12px;border-radius:20px;cursor:pointer;font-family:system-ui,sans-serif;font-size:.9rem}
+nav button.on{background:var(--accent);color:var(--bg)}
+.search{flex:1;min-width:180px;display:flex}
+.search input{width:100%;padding:8px 14px;border:1px solid var(--line);border-radius:20px;background:var(--bg);outline:none}
+.search input:focus{border-color:var(--accent)}
+.tools{display:flex;gap:4px}.tools button{border:1px solid var(--line);background:none;border-radius:8px;padding:4px 9px;cursor:pointer}
+main{max-width:1100px;margin:0 auto;padding:18px 16px 60px}
+.hero{text-align:center;padding:18px 0 6px}.hero h2{margin:0;font-size:1.6rem}.hero p{color:var(--mute);margin:6px 0 0;font-family:system-ui,sans-serif;font-size:.95rem}
+.grp{margin:22px 0 6px;font:600 .8rem system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--card);padding:8px 14px;border-radius:24px;cursor:pointer;font:.92rem system-ui,sans-serif;display:flex;gap:6px;align-items:center;transition:.15s}
+.chip:hover{border-color:var(--accent)}
+.chip.on{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:18px 0 8px;font-family:system-ui,sans-serif}
+.count{color:var(--mute);font-size:.9rem}
+.clear{border:0;background:var(--chip);color:var(--accent);padding:5px 12px;border-radius:14px;cursor:pointer}
+.res{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:14px 0;overflow:hidden}
+.res>summary{list-style:none;cursor:pointer;padding:12px 16px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;background:var(--chip)}
+.res>summary::-webkit-details-marker{display:none}
+.res .path{font:600 1rem system-ui,sans-serif}.res .src{color:var(--mute);font:.8rem system-ui,sans-serif;margin-left:auto}
+.res .body{padding:6px 18px 14px}
+.blk{margin:.7em 0}
+.blk.li{padding-left:1.2em;position:relative}.blk.li:before{content:"✦";position:absolute;left:0;color:var(--accent2);font-size:.8em;top:.25em}
+.blk.h2,.blk.h3{font:700 1.05rem system-ui,sans-serif;color:var(--accent);margin:1.2em 0 .3em}
+.blk.h2{font-size:1.25rem;border-bottom:1px solid var(--line);padding-bottom:4px}
+.blk.dim{opacity:.55}
+.pg{font:.72rem system-ui,sans-serif;color:var(--mute);margin-left:6px;white-space:nowrap}
+mark{background:var(--hit);color:inherit;border-radius:3px;padding:0 1px}
+.tw{overflow-x:auto;margin:.8em 0}table{border-collapse:collapse;font:.88rem system-ui,sans-serif;min-width:100%}
+td,th{border:1px solid var(--line);padding:5px 9px;vertical-align:top;text-align:left}tr:first-child td{font-weight:600;background:var(--chip)}
+img.fig{max-width:100%;height:auto;border-radius:6px;display:block;margin:.6em 0}
+img.hi{background:#fff;padding:3px;border-radius:4px}
+:root[data-theme=dark] img.hi{filter:invert(1) hue-rotate(180deg)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) img.hi{filter:invert(1) hue-rotate(180deg)}}
+.go{font:.8rem system-ui,sans-serif;color:var(--accent);cursor:pointer;border:0;background:none;padding:0;text-decoration:underline}
+.reader{display:grid;grid-template-columns:270px 1fr;gap:24px;align-items:start}
+.side{position:sticky;top:70px;max-height:calc(100vh - 90px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px;font-family:system-ui,sans-serif;font-size:.88rem}
+.side h4{margin:10px 6px 4px;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+.side a{display:block;padding:5px 8px;border-radius:8px;color:inherit;text-decoration:none;cursor:pointer}
+.side a:hover{background:var(--chip)}.side a.on{background:var(--accent);color:var(--bg)}
+.side a.sub{padding-left:22px;font-size:.82rem;color:var(--mute)}
+.art{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 26px 26px}
+.art h2.ct{font-size:1.9rem;color:var(--accent);margin:.6em 0 0}
+.pn{display:flex;justify-content:space-between;margin-top:24px;font-family:system-ui,sans-serif}
+.pn button{border:1px solid var(--line);background:none;border-radius:10px;padding:8px 14px;cursor:pointer}
+.books{display:flex;gap:8px;margin-bottom:8px}
+.empty{text-align:center;color:var(--mute);padding:40px 0;font-family:system-ui,sans-serif}
+.load{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--accent);color:var(--bg);padding:8px 16px;border-radius:20px;font:.85rem system-ui,sans-serif;z-index:30}
+footer{max-width:1100px;margin:0 auto;padding:0 16px 40px;color:var(--mute);font:.8rem/1.5 system-ui,sans-serif;text-align:center}
+@media(max-width:800px){.reader{grid-template-columns:1fr}.side{position:static;max-height:260px}.art{padding:6px 16px 20px}header h1{font-size:1rem}}
+@media print{header,.side,.tools,.pn,footer,.chips,.bar button{display:none}body{background:#fff;color:#000}.res,.art{border:0}}
+</style>
+</head>
+<body>
+<header>
+  <h1>🪐 Remedies Library</h1>
+  <nav><button id="n-find" class="on">Find Remedies</button><button id="n-read">Read Books</button></nav>
+  <div class="search"><input id="q" type="search" placeholder="Search all text… (e.g. Hanuman, 108 times, yellow sapphire)" autocomplete="off"></div>
+  <div class="tools"><button id="fm" title="Smaller text">A−</button><button id="fp" title="Larger text">A+</button><button id="th" title="Dark / light">◐</button></div>
+</header>
+<main id="main"></main>
+<footer>Text reproduced from <i>Encyclopaedia of Astrological Remedies</i> and <i>Remedies of Astrological Science</i> (All India Federation of Astrologers' Societies). Remedies are traditional beliefs, not a substitute for medical, legal or financial advice. Consult a qualified astrologer before acting.</footer>
+<script>
+const $=s=>document.querySelector(s);
+const TOPICS={
+ marriage:['💍','Marriage & Love',/marri|marital|matrimon|spouse|wedding|husband|\bwife|bride|groom|manglik|mangal dosh|kuja dosh|love life|love affair|romance|divorce|vivah|conjugal|cupid|soul ?mate|partner/i],
+ children:['👶','Children & Progeny',/child|progeny|\bsons?\b|santan|conceiv|pregnan|infertil|fertil|putra|womb|miscarr|barren|baby|offspring|issue comfort/i],
+ career:['💼','Career & Job',/career|\bjobs?\b|profession|promotion|employ|business|occupation|livelihood|service\b/i],
+ wealth:['💰','Wealth & Finance',/wealth|financ|money|prosper|poverty|\bdebts?\b|\bloan|lakshmi|riches|income|affluen|abundan|profit|economic|rich\b/i],
+ health:['🩺','Health & Diseases',/health|disease|ailment|illness|\bcure|heal|immun|cancer|diabet|fever|\bpain|disorder|surgery|accident|longevity|medicine|chronic|asthma|heart|skin|blood pressure|migraine|epilep|therapy|treatment/i],
+ education:['🎓','Education & Mind',/educat|student|\bstudy|studies|exam|memory|learning|academic|intellig|concentrat|knowledge|school/i],
+ enemies:['⚖️','Enemies & Legal',/enem|court|litigation|legal|lawsuit|opponent|jail|imprison|conspir|victory/i],
+ evil:['🧿','Evil Eye & Black Magic',/evil eye|nazar|black magic|witch|evil spirit|ghost|bhoot|negative energ|jadu|tona|curse|spell|evil/i],
+ pitra:['🕉️','Pitra Dosha',/pitr|pitri|ancestor|shraddh|shradh|tarpan|nagbali|forefather/i],
+ sade:['🪐','Sade Sati / Dhaiyya',/sadesati|sade sati|sadhesati|sadhe sati|dhaiyya|small panoti|kantak|ashtamshani/i],
+ kaal:['🐍','Kaal Sarp',/k[a]+l ?sarp|kalsarp/i],
+ peace:['🧘','Peace & Stress',/peace|stress|anxiety|depress|tension|mental|\bfear|sleep|\bcalm|anger|meditat/i],
+ abroad:['✈️','Foreign Travel',/foreign|abroad|overseas|travel|visa\b/i],
+ property:['🏠','Home & Property',/property|\bhouse|\bhome|\bland\b|vastu|residence|building/i],
+ success:['🏆','Success & Fame',/success|fame|reputation|authority|status|victory|power\b/i],
+ dasha:['⏳','Dasha & Transit',/dasha|dasa\b|mahadasha|antardasha|transit/i]};
+const PLANETS={sun:['☀️','Sun',/\bsun\b|surya|\bravi\b|aditya/i],moon:['🌙','Moon',/\bmoon|chandra|soma\b/i],mars:['♂️','Mars',/\bmars|mangal|kuja|bhauma/i],mercury:['☿','Mercury',/mercury|budh\b/i],jupiter:['♃','Jupiter',/jupiter|brihaspati|bruhaspati|\bguru\b/i],venus:['♀️','Venus',/venus|shukra/i],saturn:['♄','Saturn',/saturn|shani|\bsani\b/i],rahu:['☊','Rahu',/rahu/i],ketu:['☋','Ketu',/ketu/i]};
+const TYPES={gem:['💎','Gems',/\bgems?\b|stone|ruby|pearl|coral|emerald|sapphire|diamond|hessonite|gomed|cat'?s ?eye|topaz|opal|moonstone|amethyst|jewel/i],rud:['📿','Rudraksha',/rudraksh/i],yan:['🔯','Yantra',/yantra/i],man:['🔔','Mantra & Japa',/mantra|\bjapa?\b|chant|recit/i],ros:['📿','Rosary',/rosar|\bmala\b/i],cry:['🔮','Crystals',/crystal/i],par:['⚗️','Parad',/parad/i],con:['🐚','Conch',/conch|shankh/i],pyr:['🔺','Pyramid',/pyramid/i],loc:['🧷','Lockets',/locket|pendant/i],coin:['🪙','Coins & Fengshui',/\bcoins?\b|fengshui|feng shui/i],col:['🎨','Colour Therapy',/colou?r/i],vas:['🏛️','Vastu',/vastu|vaastu/i],lal:['📕','Lal Kitab',/lal kitab/i],fast:['🌾','Fasting & Vrat',/\bfast|vrat/i],sto:['📜','Stotras',/stotra|kavach|chalisa|aarti|arti\b/i],don:['🎁','Donation',/donat|daan|charity|offer/i],herb:['🌿','Herbs & Roots',/\bjadi\b|\broots?\b|herb|tulsi|basil|leaves/i],puja:['🔥','Puja & Yagya',/pu?ja\b|pooja|yagya|yajna|homa|havan|abhishek|worship/i],tab:['🧿','Talisman & Tantra',/tabeej|talisman|amulet|tantra|tantrik/i]};
+let BOOKS=[],DATA={},loaded=false,state={view:'find',topic:null,planet:null,type:null,q:''};
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function hl(t,res){t=esc(t);for(const r of res){const g=new RegExp(r.source,'gi');t=t.replace(g,m=>'<mark>'+m+'</mark>')}return t}
+async function loadAll(){
+ if(loaded)return;const ld=document.createElement('div');ld.className='load';ld.textContent='Loading books…';document.body.append(ld);
+ BOOKS=await (await fetch('data/books.json')).json();
+ const jobs=[];for(const b of BOOKS)for(const c of b.chapters)jobs.push(fetch(`data/${b.id}-${String(c.n).padStart(2,'0')}.json`).then(r=>r.json()).then(j=>{DATA[b.id+'-'+c.n]=j;ld.textContent='Loading books… '+Object.keys(DATA).length+'/'+jobs.length}));
+ await Promise.all(jobs);
+ for(const k in DATA){let h2='',h3='';for(const q of DATA[k].blocks){if(q.k==='h2'){h2=q.x;h3=''}else if(q.k==='h3')h3=q.x;q.h2=h2;q.h3=h3;q.k2=k}}
+ loaded=true;ld.remove();
+}
+const txt=q=>q.x||(q.rows?q.rows.map(r=>r.join(' ')).join(' '):'');
+function matches(q,ch,f){ // f: array of [regex, useChapterTitle]
+ const t=txt(q);const hd=(q.h2||'')+' '+(q.h3||'');
+ return f.every(([r,useCh])=>r.test(t)||r.test(hd)||(useCh&&r.test(ch)));
+}
+function filters(){const f=[];if(state.topic)f.push([TOPICS[state.topic][2],false]);if(state.planet)f.push([PLANETS[state.planet][2],false]);if(state.type)f.push([TYPES[state.type][2],true]);return f}
+function blockHTML(q,res,hit=true){
+ const p=q.p?`<span class="pg">p.${q.p}</span>`:'';
+ if(q.k==='img')return `<img class="fig${q.hi?' hi':''}" loading="lazy" src="${q.src}" alt="Page illustration">`;
+ if(q.k==='table'){let rows=q.rows;return `<div class="tw"><table>${rows.map(r=>'<tr>'+r.map(c=>`<td>${hl(c,res)}</td>`).join('')+'</tr>').join('')}</table></div>`}
+ const c=q.k==='h1'?'h2':q.k;return `<div class="blk ${c}${hit?'':' dim'}">${hl(q.x,res)}${q.k==='p'||q.k==='li'?p:''}</div>`}
+function renderFind(){
+ const f=filters();const sr=state.q?[new RegExp(state.q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i')]:[];
+ const chip=(g,map,key)=>Object.entries(map).map(([k,v])=>`<button class="chip${state[key]===k?' on':''}" data-g="${key}" data-k="${k}">${v[0]} ${v[1]}</button>`).join('');
+ let h=`<div class="hero"><h2>What do you need a remedy for?</h2><p>Pick a need, a planet or a remedy type — combine them to narrow down. Every matching passage from both books is shown in the original wording.</p></div>
+ <div class="grp">By need</div><div class="chips">${chip(0,TOPICS,'topic')}</div>
+ <div class="grp">By planet</div><div class="chips">${chip(0,PLANETS,'planet')}</div>
+ <div class="grp">By remedy type</div><div class="chips">${chip(0,TYPES,'type')}</div><div id="out"></div>`;
+ $('#main').innerHTML=h;
+ if(!f.length&&!sr.length){$('#out').innerHTML='<div class="empty">Choose a filter above, or use the search box, to see remedies.<br>Or switch to <b>Read Books</b> to browse every chapter.</div>';return}
+ if(!loaded){loadAll().then(renderFind);return}
+ const groups=[];let total=0;
+ for(const b of BOOKS)for(const c of b.chapters){const d=DATA[b.id+'-'+c.n];if(!d)continue;let cur=null;const bl=d.blocks;
+  bl.forEach((q,i)=>{if(q.k==='h1'||q.k==='h2'||q.k==='h3')return;
+   let ok=(f.length?matches(q,c.title,f):true)&&(sr.length?sr[0].test(txt(q))||false:true);
+   if(q.k==='img'){const pv=bl[i-1],nx=bl[i+1];ok=!!((pv&&pv.k!=='img'&&(f.length?matches(pv,c.title,f):true)&&(sr.length?sr[0].test(txt(pv)):true))||(nx&&nx.k!=='img'&&(f.length?matches(nx,c.title,f):true)&&(sr.length?sr[0].test(txt(nx)):true)))}
+   if(!ok)return;
+   const key=b.id+c.n+'|'+q.h2+'|'+q.h3;
+   if(!cur||cur.key!==key){cur={key,b,c,h2:q.h2,h3:q.h3,i,blocks:[],page:q.p};groups.push(cur)}
+   cur.blocks.push(q);total++});}
+ const res=[...sr];
+ const label=[state.topic&&TOPICS[state.topic][1],state.planet&&PLANETS[state.planet][1],state.type&&TYPES[state.type][1],state.q&&'“'+state.q+'”'].filter(Boolean).join(' + ');
+ let o=`<div class="bar"><b>${esc(label)}</b><span class="count">${total} passages · ${groups.length} sections</span><button class="clear" id="clr">Clear</button><button class="clear" id="exp">Collapse / expand all</button></div>`;
+ const bychap={};groups.forEach(g=>{(bychap[g.b.id+g.c.n]=bychap[g.b.id+g.c.n]||{b:g.b,c:g.c,gs:[]}).gs.push(g)});
+ for(const k in bychap){const {b,c,gs}=bychap[k];
+  o+=`<details class="res" open><summary><span class="path">${esc(b.title.length>30&&b.id==='b1'?'Encyclopaedia':'Remedies of Astrological Science')} — Ch.${c.n||''} ${esc(c.title)}</span><span class="src">${gs.length} section${gs.length>1?'s':''}</span></summary><div class="body">`;
+  for(const g of gs){const t=[g.h2,g.h3].filter(Boolean).join(' › ');
+   o+=`<div class="blk h3">${esc(t||c.title)} <span class="pg">p.${g.page||''}</span> <button class="go" data-b="${b.id}" data-c="${c.n}" data-i="${g.i}">open in book →</button></div>`;
+   for(const q of g.blocks)o+=blockHTML(q,res)}
+  o+='</div></details>'}
+ if(!groups.length)o+='<div class="empty">Nothing matched this combination. Try removing one filter.</div>';
+ $('#out').innerHTML=o}
+function renderRead(){
+ if(!BOOKS.length){loadAll().then(renderRead);return}
+ const b=BOOKS.find(x=>x.id===state.book)||BOOKS[0];const n=state.chap??(b.chapters[0].n);const c=b.chapters.find(x=>x.n===n)||b.chapters[0];
+ const d=DATA[b.id+'-'+c.n];const idx=b.chapters.indexOf(c);
+ const toc=d.blocks.filter(q=>q.k==='h2'||q.k==='h3').map(q=>`<a class="${q.k==='h3'?'sub':''}" data-jump="${d.blocks.indexOf(q)}">${esc(q.x)}</a>`).join('');
+ $('#main').innerHTML=`<div class="books">${BOOKS.map(x=>`<button class="chip${x.id===b.id?' on':''}" data-book="${x.id}">${esc(x.title)}</button>`).join('')}</div>
+ <div class="reader"><aside class="side"><h4>Chapters</h4>${b.chapters.map(x=>`<a class="${x.n===c.n?'on':''}" data-chap="${x.n}">${x.n?x.n+'. ':''}${esc(x.title)}</a>`).join('')}<h4>In this chapter</h4>${toc||'<a>—</a>'}</aside>
+ <article class="art"><h2 class="ct">${c.n?c.n+'. ':''}${esc(c.title)}</h2>${d.blocks.map((q,i)=>`<div id="b${i}">${blockHTML(q,[])}</div>`).join('')}
+ <div class="pn"><button ${idx?'':'disabled'} data-chap="${idx?b.chapters[idx-1].n:''}">← Previous</button><button ${idx<b.chapters.length-1?'':'disabled'} data-chap="${idx<b.chapters.length-1?b.chapters[idx+1].n:''}">Next →</button></div></article></div>`;
+ state.book=b.id;state.chap=c.n;
+ if(state.jump!=null){const e=$('#b'+state.jump);if(e)e.scrollIntoView({block:'start'});state.jump=null}else window.scrollTo(0,0)}
+function render(){$('#n-find').classList.toggle('on',state.view==='find');$('#n-read').classList.toggle('on',state.view==='read');state.view==='find'?renderFind():renderRead()}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-g],[data-book],[data-chap],[data-jump],.go,#clr,#exp');if(!t)return;
+ if(t.dataset.g){state[t.dataset.g]=state[t.dataset.g]===t.dataset.k?null:t.dataset.k;state.view='find';render()}
+ else if(t.dataset.book){state.book=t.dataset.book;state.chap=null;renderRead()}
+ else if(t.dataset.chap!==undefined){if(t.dataset.chap==='')return;state.chap=+t.dataset.chap;renderRead()}
+ else if(t.dataset.jump){const e2=$('#b'+t.dataset.jump);e2&&e2.scrollIntoView({behavior:'smooth'})}
+ else if(t.classList.contains('go')){state.view='read';state.book=t.dataset.b;state.chap=+t.dataset.c;state.jump=t.dataset.i;render()}
+ else if(t.id==='clr'){state.topic=state.planet=state.type=null;state.q='';$('#q').value='';render()}
+ else if(t.id==='exp'){const ds=[...document.querySelectorAll('details.res')];const o=ds.some(d=>d.open);ds.forEach(d=>d.open=!o)}});
+$('#n-find').onclick=()=>{state.view='find';render()};$('#n-read').onclick=()=>{state.view='read';render()};
+let tm;$('#q').addEventListener('input',e=>{clearTimeout(tm);tm=setTimeout(()=>{state.q=e.target.value.trim();state.view='find';render()},300)});
+let fs=16;const setfs=v=>{fs=Math.max(12,Math.min(24,v));document.documentElement.style.setProperty('--fs',fs+'px')};
+$('#fm').onclick=()=>setfs(fs-1);$('#fp').onclick=()=>setfs(fs+1);
+$('#th').onclick=()=>{const r=document.documentElement,dk=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dk?'light':'dark'};
+render();
+</script>
+</body>
+</html>
