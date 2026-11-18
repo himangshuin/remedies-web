@@ -50,7 +50,7 @@ main{max-width:1150px;margin:auto;padding:16px 16px 90px;min-height:70vh}
 .pill button{border:0;background:rgba(255,255,255,.25);color:inherit;border-radius:50%;width:20px;height:20px;line-height:18px;padding:0}
 .count{color:var(--mute);font:.85rem system-ui;margin-left:auto}
 .link{border:0;background:none;color:var(--accent);font:600 .85rem system-ui;padding:4px 6px;text-decoration:underline;text-underline-offset:3px}
-.drawer{display:none;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px 16px 18px;margin:10px 0;box-shadow:var(--sh)}.drawer.open{display:block}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:thin}.tab{flex:none;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 14px;font:600 .84rem system-ui;white-space:nowrap;display:flex;gap:7px;align-items:center}.tab i{font-style:normal;font-size:.72rem;background:var(--chip);color:var(--accent);border-radius:999px;padding:1px 7px}.tab:hover{border-color:var(--accent)}.tab.on{background:var(--accent);color:var(--card);border-color:var(--accent)}.tab.on i{background:rgba(255,255,255,.25);color:inherit}.res.col .rb{display:none}.rh b{cursor:pointer}.res{animation:fi .25s}@keyframes fi{from{opacity:0;transform:translateY(6px)}}.drawer{max-height:55vh;overflow:auto}.drawer{display:none;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px 16px 18px;margin:10px 0;box-shadow:var(--sh)}.drawer.open{display:block}
 .chap{margin:28px 0 8px;font:700 1.05rem system-ui;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
 .chap span{font:.8rem system-ui;color:var(--mute);font-weight:400}
 .res{background:var(--card);border:1px solid var(--line);border-radius:16px;margin:12px 0;box-shadow:var(--sh);overflow:hidden}
@@ -159,37 +159,45 @@ const bname=b=>b.id==='b1'?'Encyclopaedia of Astrological Remedies':'Remedies of
 function plain(g){return [g.title,...g.blocks.map(q=>q.k==='li'?'• '+q.x:q.k==='table'?q.rows.map(r=>r.join(' | ')).join('\n'):q.k==='img'?'':q.x)].filter(Boolean).join('\n')+'\n— '+g.src}
 const GROUPS={};
 /* ---------- FIND ---------- */
-function pickers(counts){
+function pickers(counts,noType){
  const n=(m,k)=>counts&&counts[m][k]!=null?`<small>${counts[m][k]} passages</small>`:'<small>&nbsp;</small>';
  return `<div class="sec"><span>By need</span></div><div class="cards">${Object.entries(TOPICS).map(([k,v])=>`<button class="card${state.topic===k?' on':''}" data-g="topic" data-k="${k}"><span class="e">${v[0]}</span>${v[1]}${n('t',k)}</button>`).join('')}</div>
  <div class="sec"><span>By planet</span></div><div class="planets">${Object.entries(PLANETS).map(([k,v])=>`<button class="pl${state.planet===k?' on':''}" data-g="planet" data-k="${k}"><span class="e">${v[0]}</span>${v[1]}</button>`).join('')}</div>
- <div class="sec"><span>By remedy type</span></div><div class="chips">${Object.entries(TYPES).map(([k,v])=>`<button class="chip${state.type===k?' on':''}" data-g="type" data-k="${k}">${v[0]} ${v[1]}</button>`).join('')}</div>`}
+ ${noType?'':'<div class="sec"><span>By remedy type</span></div>'}<div class="chips"${noType?' hidden':''}>${Object.entries(TYPES).map(([k,v])=>`<button class="chip${state.type===k?' on':''}" data-g="type" data-k="${k}">${v[0]} ${v[1]}</button>`).join('')}</div>`}
 let COUNTS=null;
 function computeCounts(){if(COUNTS||!loaded)return COUNTS;COUNTS={t:{},p:{},y:{}};
  const all=[];for(const b of BOOKS)for(const c of b.chapters)for(const q of DATA[b.id+'-'+c.n].blocks)if(!['h1','h2','h3','img'].includes(q.k))all.push(q);
  for(const k in TOPICS)COUNTS.t[k]=all.filter(q=>matches(q,'',[[TOPICS[k][2],false]])).length;return COUNTS}
+const COMBOS=[['marriage',null,'man','💍 Marriage mantras'],['career',null,'gem','💼 Career gems'],['health',null,'rud','🩺 Health rudraksha'],['wealth',null,'yan','💰 Wealth yantras'],['children',null,'man','👶 Children mantras'],['education',null,'man','🎓 Study mantras'],['sade',null,'don','🪐 Sade Sati donations'],['evil',null,'yan','🧿 Evil eye yantras']];
 async function renderFind(){
- const f=filters(),qs=state.q.trim(),sr=qs?[new RegExp(rx(qs),'i')]:[];
- if(!f.length&&!sr.length){
-  $('#main').innerHTML=`<div class="hero"><h2>Find the <span>right remedy</span><br>without reading the book again</h2><p>Every remedy from two classic AIFAS books, in the original words. Pick a need, a planet or a remedy type — or search for anything.</p></div>${pickers(COUNTS)}`;
+ const f=[];if(state.topic)f.push([TOPICS[state.topic][2],false]);if(state.planet)f.push([PLANETS[state.planet][2],false]);
+ const qs=state.q.trim(),sr=qs?[new RegExp(rx(qs),'i')]:[],act=state.type;
+ if(!f.length&&!sr.length&&!act){
+  $('#main').innerHTML=`<div class="hero"><h2>Find the <span>right remedy</span><br>without reading the book again</h2><p>Every remedy from two classic AIFAS books, in the original words. Choose a need, then switch between Mantra, Yantra, Gems, Rudraksha and other tabs.</p><div class="chips" style="justify-content:center;margin-top:16px">${COMBOS.map(c=>`<button class="chip" data-combo="${c[0]}||${c[2]}">${c[3]}</button>`).join('')}</div></div>${pickers(COUNTS)}`;
   if(!loaded){await loadAll();if(state.view==='find'&&!filters().length&&!state.q.trim()){computeCounts();renderFind()}}return}
  if(!loaded){$('#main').innerHTML='<div class="sk"></div><div class="sk"></div><div class="sk"></div>';await loadAll()}
+ const tkeys=Object.keys(TYPES),counts={all:0,gen:0};tkeys.forEach(k=>counts[k]=0);
+ const typeOf=(q,ct)=>{const t=txt(q),hd=q.h2+' '+q.h3;return tkeys.filter(k=>{const r=TYPES[k][2];return r.test(t)||r.test(hd)||r.test(ct)})};
  const groups=[];let total=0;
  for(const b of BOOKS)for(const c of b.chapters){const bl=DATA[b.id+'-'+c.n].blocks;let cur=null;
-  const ok=q=>(!f.length||matches(q,c.title,f))&&(!sr.length||sr[0].test(txt(q)));
+  const base=q=>(!f.length||matches(q,c.title,f))&&(!sr.length||sr[0].test(txt(q)));
+  const hit=bl.map(q=>{if(['h1','h2','h3','img'].includes(q.k)||!base(q))return false;const ts=typeOf(q,c.title);counts.all++;if(!ts.length)counts.gen++;ts.forEach(k=>counts[k]++);return !act||(act==='gen'?!ts.length:ts.includes(act))});
   bl.forEach((q,i)=>{if(['h1','h2','h3'].includes(q.k))return;
-   let hit=q.k==='img'?((bl[i-1]&&bl[i-1].k!=='img'&&ok(bl[i-1]))||(bl[i+1]&&bl[i+1].k!=='img'&&ok(bl[i+1]))):ok(q);
-   if(!hit)return;const key=q.h2+'|'+q.h3;
+   const h=q.k==='img'?(hit[i-1]||hit[i+1]):hit[i];if(!h)return;const key=q.h2+'|'+q.h3;
    if(!cur||cur.key!==key){cur={key,b,c,title:[q.h2,q.h3].filter(Boolean).join(' › ')||c.title,src:`${bname(b)}, Ch.${c.n||'Intro'} ${c.title}, p.${q.p||''}`,page:q.p,i:q.i,blocks:[],id:b.id+'-'+c.n+'-'+q.i};groups.push(cur);GROUPS[cur.id]=cur}
    cur.blocks.push(q);if(q.k!=='img')total++})}
- const label=[state.topic&&TOPICS[state.topic][1],state.planet&&PLANETS[state.planet][1],state.type&&TYPES[state.type][1],qs&&'“'+qs+'”'];
- const pills=[['topic',label[0]],['planet',label[1]],['type',label[2]],['q',label[3]]].filter(x=>x[1]).map(([k,v])=>`<span class="pill">${esc(v)}<button data-rm="${k}" aria-label="Remove">×</button></span>`).join('');
- const sv=new Set(saved().map(x=>x.id));let o=`<div class="fbar"><div class="fr">${pills}<button class="link" id="dr">${state.drawer?'Hide filters':'＋ Change filters'}</button><button class="link" id="clr">Clear all</button><span class="count">${total} passages in ${groups.length} sections</span></div><div class="drawer${state.drawer?' open':''}">${pickers(COUNTS)}</div></div>`;
+ const label={topic:state.topic&&TOPICS[state.topic][1],planet:state.planet&&PLANETS[state.planet][1],q:qs&&'“'+qs+'”',type:!f.length&&!sr.length&&act&&(act==='gen'?'General advice':TYPES[act][1])};
+ const pills=Object.entries(label).filter(x=>x[1]).map(([k,v])=>`<span class="pill">${esc(v)}<button data-rm="${k}" aria-label="Remove">×</button></span>`).join('');
+ const tab=(k,l)=>`<button class="tab${(act||'all')===k?' on':''}" data-tab="${k}">${l}<i>${counts[k]}</i></button>`;
+ const tabs=[tab('all','All'),...tkeys.filter(k=>counts[k]>0||k===act).sort((a,b)=>counts[b]-counts[a]).map(k=>tab(k,TYPES[k][0]+' '+TYPES[k][1])),counts.gen||act==='gen'?tab('gen','📝 General advice'):''].join('');
+ const sv=new Set(saved().map(x=>x.id));
+ let o=`<div class="fbar"><div class="fr">${pills}<button class="link" id="dr">${state.drawer?'Hide filters':'＋ Change filters'}</button><button class="link" id="clr">Clear all</button><span class="count">${total} passages · ${groups.length} sections</span></div><div class="drawer${state.drawer?' open':''}">${pickers(COUNTS,true)}</div><div class="tabs" role="tablist">${tabs}</div></div>
+ <div class="fr" style="margin:10px 0 0;justify-content:flex-end"><button class="link" id="colall">Collapse / expand all</button><button class="link" id="share">🔗 Copy link</button></div>`;
  let last='';
  groups.slice(0,SHOW).forEach(g=>{const ck=g.b.id+g.c.n;if(ck!==last){last=ck;o+=`<div class="chap">${g.c.n?g.c.n+'. ':''}${esc(g.c.title)}<span>${esc(g.b.id==='b1'?'Encyclopaedia':'Remedies of Astrological Science')}</span></div>`}
-  o+=`<section class="res"><div class="rh"><b>${esc(g.title)}</b><span class="pg">p.${g.page||''}</span><button class="act" data-open="${g.id}">Open in book</button><button class="act" data-copy="${g.id}">Copy</button><button class="act sv" data-save="${g.id}">${sv.has(g.id)?'★ Saved':'☆ Save'}</button></div><div class="rb">${g.blocks.map(q=>blockHTML(q,sr)).join('')}</div></section>`});
+  o+=`<section class="res"><div class="rh"><b data-tog title="Tap to collapse">${esc(g.title)}</b><span class="pg">p.${g.page||''}</span><button class="act" data-open="${g.id}">Open in book</button><button class="act" data-copy="${g.id}">Copy</button><button class="act sv" data-save="${g.id}">${sv.has(g.id)?'★ Saved':'☆ Save'}</button></div><div class="rb">${g.blocks.map(q=>blockHTML(q,sr)).join('')}</div></section>`});
  if(groups.length>SHOW)o+=`<button class="more" id="more">Show more (${groups.length-SHOW} sections left)</button>`;
- if(!groups.length)o+='<div class="empty"><span class="e">🪷</span>Nothing matched this combination.<br>Try removing a filter.</div>';
+ if(!groups.length)o+='<div class="empty"><span class="e">🪷</span>Nothing in this tab for your selection.<br>Try the “All” tab or remove a filter.</div>';
  const y=scrollY;$('#main').innerHTML=o;if(state.keepScroll){scrollTo(0,y);state.keepScroll=false}}
 /* ---------- READ ---------- */
 async function renderRead(){
@@ -217,9 +225,14 @@ function render(){SHOW=25;$$('[data-v]').forEach(b=>b.classList.toggle('on',b.da
  ({find:renderFind,read:renderRead,saved:renderSaved})[state.view]()}
 function nav(){const h=hashFor();if(location.hash===h)render();else location.hash=h}
 addEventListener('hashchange',()=>{parseHash();render()});
-document.addEventListener('click',e=>{const t=e.target.closest('[data-g],[data-rm],[data-v],[data-book],[data-chap],[data-jump],[data-open],[data-copy],[data-copyS],[data-save],#dr,#clr,#more,#cb,#logo,#top,#cpall,#prt');if(!t)return;
+document.addEventListener('click',e=>{const t=e.target.closest('[data-g],[data-tab],[data-combo],[data-tog],#colall,#share,[data-rm],[data-v],[data-book],[data-chap],[data-jump],[data-open],[data-copy],[data-copyS],[data-save],#dr,#clr,#more,#cb,#logo,#top,#cpall,#prt');if(!t)return;
  const d=t.dataset;
- if(d.g){state[d.g]=state[d.g]===d.k?null:d.k;state.view='find';state.drawer=false;nav();scrollTo(0,0)}
+ if(d.tab!==undefined){state.type=d.tab==='all'?null:d.tab;nav();scrollTo(0,0)}
+ else if(d.combo){const[a,b,c]=d.combo.split('|');state.view='find';state.topic=a||null;state.planet=b||null;state.type=c||null;state.q='';$('#q').value='';nav();scrollTo(0,0)}
+ else if(d.tog!==undefined)t.closest('.res').classList.toggle('col')
+ else if(t.id==='colall'){const r=$$('.res'),c=r.some(x=>!x.classList.contains('col'));r.forEach(x=>x.classList.toggle('col',c))}
+ else if(t.id==='share')navigator.clipboard.writeText(location.href).then(()=>toast('Link copied'))
+ else if(d.g){state[d.g]=state[d.g]===d.k?null:d.k;state.view='find';state.drawer=false;nav();scrollTo(0,0)}
  else if(d.rm){state[d.rm]=d.rm==='q'?'':null;if(d.rm==='q')$('#q').value='';nav()}
  else if(d.v){state.view=d.v;nav()}
  else if(d.book){state.book=d.book;state.chap=null;nav()}
