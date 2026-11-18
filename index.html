@@ -65,7 +65,7 @@ main{max-width:1150px;margin:auto;padding:16px 16px 90px;min-height:70vh}
 mark{background:var(--hit);color:inherit;border-radius:3px;padding:0 1px}
 .tw{overflow-x:auto;margin:.8em 0;border:1px solid var(--line);border-radius:10px}
 table{border-collapse:collapse;font:.86rem system-ui;min-width:100%}td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:6px 10px;vertical-align:top}tr:first-child td{font-weight:700;background:var(--chip)}td:last-child{border-right:0}tr:last-child td{border-bottom:0}
-img.fig{max-width:100%;height:auto;border-radius:8px;display:block;margin:.6em 0}
+body.sans{font-family:system-ui,-apple-system,Segoe UI,sans-serif}body.noimg img.fig{display:none}img.fig{min-height:40px;background:var(--chip);max-width:100%;height:auto;border-radius:8px;display:block;margin:.6em 0}
 img.hi{background:#fff;padding:4px;border-radius:6px}
 :root[data-theme=dark] img.hi{filter:invert(1) hue-rotate(180deg)}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]) img.hi{filter:invert(1) hue-rotate(180deg)}}
@@ -96,6 +96,19 @@ footer{max-width:1150px;margin:0 auto;padding:0 16px 100px;color:var(--mute);fon
  .bn button{flex:1;border:0;background:none;padding:9px 0 8px;font:600 .7rem system-ui;color:var(--mute);display:flex;flex-direction:column;gap:1px}.bn button span{font-size:1.2rem}.bn button.on{color:var(--accent)}
  #top{bottom:70px}.card{padding:12px 8px}.cards{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}}
 @media print{header,.side,.tools,.pn,footer,.bn,.fbar,.act,.more,#top,#prog{display:none!important}body{background:#fff;color:#000}.res,.art{border:0;box-shadow:none}}
+.grid{columns:330px;column-gap:16px;margin-top:14px}.grid .res{break-inside:avoid;margin:0 0 16px;display:block}
+.res{border-radius:18px}.rh{display:flex;gap:12px;align-items:center;padding:14px 16px 8px;background:none}.ico{flex:none;width:42px;height:42px;border-radius:12px;background:var(--chip);display:grid;place-items:center;font-size:1.4rem}
+.tt b{display:block;font:700 1rem/1.3 system-ui;color:var(--ink)}.tt small{font:.74rem system-ui;color:var(--mute)}
+.tgs{display:flex;gap:6px;flex-wrap:wrap;padding:0 16px 4px}.tg{font:600 .72rem system-ui;background:var(--chip);color:var(--accent);padding:2px 9px;border-radius:999px}
+.grid .rb{padding:4px 16px 8px}.it{font-size:.93rem;line-height:1.55;margin:.55em 0;padding-left:1.1em;position:relative}.it:before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--accent2)}
+.it.clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer}.it.clamp.open{display:block}
+.lb{font:700 .72rem system-ui;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);background:var(--chip);padding:1px 7px;border-radius:6px;margin-right:4px}
+.mantra{display:flex;gap:8px;align-items:center;justify-content:space-between;margin:.7em 0;padding:10px 12px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent2) 16%,transparent),var(--chip));border-radius:12px;font:600 .95rem/1.45 Georgia,serif;border-left:4px solid var(--accent2)}
+.mr{margin:2px 0 4px}.rf{display:flex;gap:4px;padding:6px 10px 10px;border-top:1px solid var(--line)}.rf .act{flex:1;padding:8px 4px;font-weight:600}
+.tbl{margin:.6em 0}.tbl summary{cursor:pointer;font:600 .85rem system-ui;color:var(--accent)}
+.gal{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}img.th{height:84px;width:auto;max-width:48%;object-fit:cover;border-radius:10px;cursor:zoom-in;margin:0}
+.lbx{position:fixed;inset:0;background:#000d;z-index:80;display:grid;place-items:center;cursor:zoom-out}.lbx img{max-width:94vw;max-height:90vh;background:#fff;border-radius:8px}
+.lb{background:hsl(var(--h,270) 60% 50%/.15);color:color-mix(in srgb,hsl(var(--h,270) 70% 42%) 65%,var(--ink))}.it:before{display:none}.it{padding-left:0;margin:.8em 0}
 </style>
 </head>
 <body>
@@ -104,10 +117,10 @@ footer{max-width:1150px;margin:0 auto;padding:0 16px 100px;color:var(--mute);fon
   <button class="logo" id="logo">🪐 Remedies Library</button>
   <nav class="top"><button data-v="find">Find</button><button data-v="read">Read</button><button data-v="saved">Saved <span id="sc"></span></button></nav>
   <div class="search"><input id="q" type="search" placeholder="Search every page… (Hanuman, 108 times, yellow sapphire)" autocomplete="off"><kbd>/</kbd></div>
-  <div class="tools"><button class="ib" id="fm" title="Smaller text">A−</button><button class="ib" id="fp" title="Larger text">A+</button><button class="ib" id="th" title="Dark / light">◐</button></div>
+  <div class="tools"><button class="ib" id="fm" title="Smaller text">A−</button><button class="ib" id="fp" title="Larger text">A+</button><button class="ib" id="fnt" title="Serif / sans font">Aa</button><button class="ib" id="th" title="Dark / light">◐</button></div>
 </div></header>
 <main id="main"></main>
-<footer>Text reproduced from <i>Encyclopaedia of Astrological Remedies</i> and <i>Remedies of Astrological Science</i> (All India Federation of Astrologers' Societies). Remedies are traditional beliefs, not a substitute for medical, legal or financial advice. Consult a qualified astrologer before acting.</footer>
+<footer>Text reproduced from <i>Encyclopaedia of Astrological Remedies</i> and <i>Remedies of Astrological Science</i> (All India Federation of Astrologers' Societies). Remedies are traditional beliefs, not a substitute for medical, legal or financial advice. Consult a qualified astrologer before acting.<br>Version 6</footer>
 <div class="bn"><button data-v="find"><span>🔎</span>Find</button><button data-v="read"><span>📖</span>Read</button><button data-v="saved"><span>⭐</span>Saved</button></div>
 <button id="top" title="Back to top">↑</button>
 <script>
@@ -132,7 +145,7 @@ const TOPICS={
 const PLANETS={sun:['☀️','Sun',/\bsun\b|surya|\bravi\b|aditya/i],moon:['🌙','Moon',/\bmoon|chandra|soma\b/i],mars:['♂️','Mars',/\bmars|mangal|kuja|bhauma/i],mercury:['☿','Mercury',/mercury|budh\b/i],jupiter:['♃','Jupiter',/jupiter|brihaspati|bruhaspati|\bguru\b/i],venus:['♀️','Venus',/venus|shukra/i],saturn:['♄','Saturn',/saturn|shani|\bsani\b/i],rahu:['☊','Rahu',/rahu/i],ketu:['☋','Ketu',/ketu/i]};
 const TYPES={gem:['💎','Gems',/\bgems?\b|stone|ruby|pearl|coral|emerald|sapphire|diamond|hessonite|gomed|cat'?s ?eye|topaz|opal|moonstone|amethyst|jewel/i],rud:['📿','Rudraksha',/rudraksh/i],yan:['🔯','Yantra',/yantra/i],man:['🔔','Mantra & Japa',/mantra|\bjapa?\b|chant|recit/i],ros:['📿','Rosary',/rosar|\bmala\b/i],cry:['🔮','Crystals',/crystal/i],par:['⚗️','Parad',/parad/i],con:['🐚','Conch',/conch|shankh/i],pyr:['🔺','Pyramid',/pyramid/i],loc:['🧷','Lockets',/locket|pendant/i],coin:['🪙','Coins & Fengshui',/\bcoins?\b|fengshui|feng shui/i],col:['🎨','Colour Therapy',/colou?r/i],vas:['🏛️','Vastu',/vastu|vaastu/i],lal:['📕','Lal Kitab',/lal kitab/i],fast:['🌾','Fasting & Vrat',/\bfast|vrat/i],sto:['📜','Stotras',/stotra|kavach|chalisa|aarti|arti\b/i],don:['🎁','Donation',/donat|daan|charity|offer/i],herb:['🌿','Herbs & Roots',/\bjadi\b|\broots?\b|herb|tulsi|basil|leaves/i],puja:['🔥','Puja & Yagya',/pu?ja\b|pooja|yagya|yajna|homa|havan|abhishek|worship/i],tab:['🧿','Talisman & Tantra',/tabeej|talisman|amulet|tantra|tantrik/i]};
 
-let BOOKS=[],DATA={},loaded=false,loading=null,SHOW=25;
+let BOOKS=[],DATA={},loaded=false,loading=null,SHOW=18;
 let state={view:'find',topic:null,planet:null,type:null,q:'',book:'b1',chap:null,jump:null,drawer:false};
 const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const rx=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
@@ -142,22 +155,26 @@ const saved=()=>{try{return JSON.parse(localStorage.getItem('saved')||'[]')}catc
 const setSaved=v=>{try{localStorage.setItem('saved',JSON.stringify(v))}catch(e){}$('#sc').textContent=v.length?'('+v.length+')':''};
 function loadAll(){
  if(loading)return loading;
- loading=(async()=>{BOOKS=await (await fetch('data/books.json')).json();
-  const jobs=[];for(const b of BOOKS)for(const c of b.chapters)jobs.push(fetch(`data/${b.id}-${String(c.n).padStart(2,'0')}.json`).then(r=>r.json()).then(j=>{DATA[b.id+'-'+c.n]=j}));
+ loading=(async()=>{BOOKS=await (await fetch('data/books.json?v=6')).json();
+  const jobs=[];for(const b of BOOKS)for(const c of b.chapters)jobs.push(fetch(`data/${b.id}-${String(c.n).padStart(2,'0')}.json?v=6`).then(r=>r.json()).then(j=>{DATA[b.id+'-'+c.n]=j}));
   await Promise.all(jobs);
-  for(const k in DATA){let h2='',h3='';DATA[k].blocks.forEach((q,i)=>{if(q.k==='h2'){h2=q.x;h3=''}else if(q.k==='h3')h3=q.x;q.h2=h2;q.h3=h3;q.i=i;q.key=k})}
+  for(const k in DATA){let h2='',h3='',sk=false;DATA[k].blocks.forEach((q,i)=>{if(q.k==='h2'){h2=q.x;h3=''}else if(q.k==='h3')h3=q.x;q.h2=h2;q.h3=h3;q.i=i;q.key=k;if(q.k==='h2'||q.k==='h3')sk=/^exercise/i.test(q.x.trim());q.skip=DATA[k].n===0||sk})}
   loaded=true})();
  return loading}
+const CUE=/\b(wear|chant|recite|reciting|recitation|donate|donation|donating|offer|offering|worship|fast|fasting|keep|install|place|feed|light|perform|visit|use|take|drink|apply|bathe|bath|pour|tie|hang|put|should|must|avoid|daily|times|mantra|japa|jap|puja|pooja|yagya|homa|havan|abhishek|gem|rudraksha|yantra|stone|ring|locket|serve|respect|help|plant|water|meditate|meditation|observe|do not|don't|read|listen|sit|face|burn|distribute|give)\b/i;
+const MANTRA=t=>t.length<230&&/^(om|aum|shree|shri|hreem|namo)\b/i.test(t)&&/namah|namaha|swaha|svaha|phat|vashat|namo|hum\b/i.test(t);
+const isRem=q=>{if(q.k==='li')return true;if(q.k==='table')return true;if(q.k!=='p')return false;const t=q.x;return MANTRA(t)||(t.length<=520&&CUE.test(t))};
 const txt=q=>q.x||(q.rows?q.rows.map(r=>r.join(' ')).join(' '):'');
 const matches=(q,ch,f)=>{const t=txt(q),hd=q.h2+' '+q.h3;return f.every(([r,u])=>r.test(t)||r.test(hd)||(u&&r.test(ch)))};
 const filters=()=>{const f=[];if(state.topic)f.push([TOPICS[state.topic][2],false]);if(state.planet)f.push([PLANETS[state.planet][2],false]);if(state.type)f.push([TYPES[state.type][2],true]);return f};
 function blockHTML(q,res){
- if(q.k==='img')return `<img class="fig${q.hi?' hi':''}" loading="lazy" src="${q.src}" alt="Illustration from the book">`;
+ if(q.k==='img')return `<img class="fig${q.hi?' hi':''}" data-im="${q.src}" data-k="${q.key.replace(/-(\d+)$/,(m,x)=>'-'+x.padStart(2,'0'))}" alt="Illustration from the book" width="300" height="80">`;
  if(q.k==='table')return `<div class="tw"><table>${q.rows.map(r=>'<tr>'+r.map(c=>`<td>${hl(c,res)}</td>`).join('')+'</tr>').join('')}</table></div>`;
- const c=q.k==='h1'?'h2':q.k;return `<div class="blk ${c}">${hl(q.x,res)}${(q.k==='p'||q.k==='li')&&q.p?`<span class="pg">p.${q.p}</span>`:''}</div>`}
+ const c=q.k==='h1'?'h2':q.k;return `<div class="blk ${c}">${hl(q.x,res)}${(q.k==='p'||q.k==='li')&&q.p>0?`<span class="pg">p.${q.p}</span>`:''}</div>`}
 const bname=b=>b.id==='b1'?'Encyclopaedia of Astrological Remedies':'Remedies of Astrological Science';
 function plain(g){return [g.title,...g.blocks.map(q=>q.k==='li'?'• '+q.x:q.k==='table'?q.rows.map(r=>r.join(' | ')).join('\n'):q.k==='img'?'':q.x)].filter(Boolean).join('\n')+'\n— '+g.src}
-const GROUPS={};
+const GROUPS={};const PK={};const pack=k=>PK[k]||(PK[k]=fetch(`data/img-${k}.json?v=6`).then(r=>r.json()));
+function hydrate(){$$('img[data-im]').forEach(e=>{pack(e.dataset.k).then(p=>{e.onload=()=>{e.removeAttribute('width');e.removeAttribute('height')};e.src=p[e.dataset.im];e.removeAttribute('data-im')}).catch(()=>{})})}
 /* ---------- FIND ---------- */
 function pickers(counts,noType){
  const n=(m,k)=>counts&&counts[m][k]!=null?`<small>${counts[m][k]} passages</small>`:'<small>&nbsp;</small>';
@@ -166,14 +183,15 @@ function pickers(counts,noType){
  ${noType?'':'<div class="sec"><span>By remedy type</span></div>'}<div class="chips"${noType?' hidden':''}>${Object.entries(TYPES).map(([k,v])=>`<button class="chip${state.type===k?' on':''}" data-g="type" data-k="${k}">${v[0]} ${v[1]}</button>`).join('')}</div>`}
 let COUNTS=null;
 function computeCounts(){if(COUNTS||!loaded)return COUNTS;COUNTS={t:{},p:{},y:{}};
- const all=[];for(const b of BOOKS)for(const c of b.chapters)for(const q of DATA[b.id+'-'+c.n].blocks)if(!['h1','h2','h3','img'].includes(q.k))all.push(q);
+ const all=[];for(const b of BOOKS)for(const c of b.chapters)for(const q of DATA[b.id+'-'+c.n].blocks)if(!['h1','h2','h3','img'].includes(q.k)&&!q.skip&&isRem(q))all.push(q);
  for(const k in TOPICS)COUNTS.t[k]=all.filter(q=>matches(q,'',[[TOPICS[k][2],false]])).length;return COUNTS}
+const lastBtn=()=>{try{const l=JSON.parse(localStorage.getItem('last'));return l?`<p style="margin-top:14px"><button class="chip on" data-last="1">📖 Continue reading: ${esc(l.t)}</button></p>`:''}catch(e){return''}};
 const COMBOS=[['marriage',null,'man','💍 Marriage mantras'],['career',null,'gem','💼 Career gems'],['health',null,'rud','🩺 Health rudraksha'],['wealth',null,'yan','💰 Wealth yantras'],['children',null,'man','👶 Children mantras'],['education',null,'man','🎓 Study mantras'],['sade',null,'don','🪐 Sade Sati donations'],['evil',null,'yan','🧿 Evil eye yantras']];
 async function renderFind(){
  const f=[];if(state.topic)f.push([TOPICS[state.topic][2],false]);if(state.planet)f.push([PLANETS[state.planet][2],false]);
- const qs=state.q.trim(),sr=qs?[new RegExp(rx(qs),'i')]:[],act=state.type;
+ const qs=state.q.trim(),sr=qs?[new RegExp(rx(qs),'i')]:[],act=state.type,remOnly=f.length>0||!!act;
  if(!f.length&&!sr.length&&!act){
-  $('#main').innerHTML=`<div class="hero"><h2>Find the <span>right remedy</span><br>without reading the book again</h2><p>Every remedy from two classic AIFAS books, in the original words. Choose a need, then switch between Mantra, Yantra, Gems, Rudraksha and other tabs.</p><div class="chips" style="justify-content:center;margin-top:16px">${COMBOS.map(c=>`<button class="chip" data-combo="${c[0]}||${c[2]}">${c[3]}</button>`).join('')}</div></div>${pickers(COUNTS)}`;
+  $('#main').innerHTML=`<div class="hero"><h2>Find the <span>right remedy</span><br>without reading the book again</h2><p>Every remedy from two classic AIFAS books, in the original words. Choose a need, then switch between Mantra, Yantra, Gems, Rudraksha and other tabs.</p>${lastBtn()}<div class="chips" style="justify-content:center;margin-top:16px">${COMBOS.map(c=>`<button class="chip" data-combo="${c[0]}||${c[2]}">${c[3]}</button>`).join('')}</div></div>${pickers(COUNTS)}`;
   if(!loaded){await loadAll();if(state.view==='find'&&!filters().length&&!state.q.trim()){computeCounts();renderFind()}}return}
  if(!loaded){$('#main').innerHTML='<div class="sk"></div><div class="sk"></div><div class="sk"></div>';await loadAll()}
  const tkeys=Object.keys(TYPES),counts={all:0,gen:0};tkeys.forEach(k=>counts[k]=0);
@@ -181,24 +199,38 @@ async function renderFind(){
  const groups=[];let total=0;
  for(const b of BOOKS)for(const c of b.chapters){const bl=DATA[b.id+'-'+c.n].blocks;let cur=null;
   const base=q=>(!f.length||matches(q,c.title,f))&&(!sr.length||sr[0].test(txt(q)));
-  const hit=bl.map(q=>{if(['h1','h2','h3','img'].includes(q.k)||!base(q))return false;const ts=typeOf(q,c.title);counts.all++;if(!ts.length)counts.gen++;ts.forEach(k=>counts[k]++);return !act||(act==='gen'?!ts.length:ts.includes(act))});
+  const hit=bl.map(q=>{if(['h1','h2','h3','img'].includes(q.k)||q.skip||(remOnly&&!isRem(q))||!base(q))return false;const ts=typeOf(q,c.title);counts.all++;if(!ts.length)counts.gen++;ts.forEach(k=>counts[k]++);return !act||(act==='gen'?!ts.length:ts.includes(act))});
   bl.forEach((q,i)=>{if(['h1','h2','h3'].includes(q.k))return;
    const h=q.k==='img'?(hit[i-1]||hit[i+1]):hit[i];if(!h)return;const key=q.h2+'|'+q.h3;
    if(!cur||cur.key!==key){cur={key,b,c,title:[q.h2,q.h3].filter(Boolean).join(' › ')||c.title,src:`${bname(b)}, Ch.${c.n||'Intro'} ${c.title}, p.${q.p||''}`,page:q.p,i:q.i,blocks:[],id:b.id+'-'+c.n+'-'+q.i};groups.push(cur);GROUPS[cur.id]=cur}
    cur.blocks.push(q);if(q.k!=='img')total++})}
- const label={topic:state.topic&&TOPICS[state.topic][1],planet:state.planet&&PLANETS[state.planet][1],q:qs&&'“'+qs+'”',type:!f.length&&!sr.length&&act&&(act==='gen'?'General advice':TYPES[act][1])};
+ if(f.length)groups.sort((a,b)=>(f[0][0].test(b.title)?1:0)-(f[0][0].test(a.title)?1:0));
+ const label={topic:state.topic&&TOPICS[state.topic][1],planet:state.planet&&PLANETS[state.planet][1],q:qs&&'“'+qs+'”',type:!f.length&&!sr.length&&act&&(act==='gen'?'Other remedies':TYPES[act][1])};
  const pills=Object.entries(label).filter(x=>x[1]).map(([k,v])=>`<span class="pill">${esc(v)}<button data-rm="${k}" aria-label="Remove">×</button></span>`).join('');
  const tab=(k,l)=>`<button class="tab${(act||'all')===k?' on':''}" data-tab="${k}">${l}<i>${counts[k]}</i></button>`;
- const tabs=[tab('all','All'),...tkeys.filter(k=>counts[k]>0||k===act).sort((a,b)=>counts[b]-counts[a]).map(k=>tab(k,TYPES[k][0]+' '+TYPES[k][1])),counts.gen||act==='gen'?tab('gen','📝 General advice'):''].join('');
+ const tabs=[tab('all','All'),...tkeys.filter(k=>counts[k]>0||k===act).sort((a,b)=>counts[b]-counts[a]).map(k=>tab(k,TYPES[k][0]+' '+TYPES[k][1])),counts.gen||act==='gen'?tab('gen','✦ Other remedies'):''].join('');
  const sv=new Set(saved().map(x=>x.id));
+ const itemHTML=(q,sr)=>{if(q.k==='table')return `<details class="tbl"><summary>📊 View table</summary>${blockHTML(q,sr)}</details>`;const t=q.x;
+  if(t.length<230&&/^(om|aum|shree|shri|hreem|namo)\b/i.test(t)&&/namah|namaha|swaha|svaha|phat|vashat|namo|hum\b/i.test(t))return `<div class="mantra"><span>🔔 ${hl(t,sr)}</span><button class="act" data-cm="${esc(t).replace(/"/g,'&quot;')}">Copy</button></div>`;
+  const m=(q.k==='li'||t.length<200)&&t.match(/^([A-Z][A-Za-z '&\/()]{1,26}?)\s[-–—:]\s(.{3,})$/);
+  const hue=k=>(tkeys.indexOf(k)*37)%360,tk=(m&&tkeys.find(k=>TYPES[k][2].test(m[1])))||tkeys.find(k=>TYPES[k][2].test(t));
+  const badge=m?`<span class="lb" style="--h:${tk?hue(tk):270}">${tk?TYPES[tk][0]+' ':''}${esc(m[1])}</span>`:(tk?`<span class="lb" style="--h:${hue(tk)}">${TYPES[tk][0]} ${TYPES[tk][1]}</span>`:'');
+  return `<div class="it${q.k==='li'?' li':''}${t.length>300?' clamp':''}">${badge} ${hl(m?m[2]:t,sr)}</div>`};
  let o=`<div class="fbar"><div class="fr">${pills}<button class="link" id="dr">${state.drawer?'Hide filters':'＋ Change filters'}</button><button class="link" id="clr">Clear all</button><span class="count">${total} passages · ${groups.length} sections</span></div><div class="drawer${state.drawer?' open':''}">${pickers(COUNTS,true)}</div><div class="tabs" role="tablist">${tabs}</div></div>
- <div class="fr" style="margin:10px 0 0;justify-content:flex-end"><button class="link" id="colall">Collapse / expand all</button><button class="link" id="share">🔗 Copy link</button></div>`;
- let last='';
- groups.slice(0,SHOW).forEach(g=>{const ck=g.b.id+g.c.n;if(ck!==last){last=ck;o+=`<div class="chap">${g.c.n?g.c.n+'. ':''}${esc(g.c.title)}<span>${esc(g.b.id==='b1'?'Encyclopaedia':'Remedies of Astrological Science')}</span></div>`}
-  o+=`<section class="res"><div class="rh"><b data-tog title="Tap to collapse">${esc(g.title)}</b><span class="pg">p.${g.page||''}</span><button class="act" data-open="${g.id}">Open in book</button><button class="act" data-copy="${g.id}">Copy</button><button class="act sv" data-save="${g.id}">${sv.has(g.id)?'★ Saved':'☆ Save'}</button></div><div class="rb">${g.blocks.map(q=>blockHTML(q,sr)).join('')}</div></section>`});
+ <div class="fr" style="margin:10px 0 0;justify-content:flex-end"><button class="link" id="colall">Collapse / expand all</button><button class="link" id="imgt">🖼 Images on/off</button><button class="link" id="share">🔗 Copy link</button></div>`;
+ const icoOf=g=>{if(act&&act!=='gen')return TYPES[act][0];const t=g.title+' '+g.c.title;const k=tkeys.find(k=>TYPES[k][2].test(g.title))||tkeys.find(k=>TYPES[k][2].test(t));return k?TYPES[k][0]:'✦'};
+ o+='<div class="grid">';
+ groups.slice(0,SHOW).forEach(g=>{
+  const items=g.blocks.filter(q=>q.k!=='img'),imgs=g.blocks.filter(q=>q.k==='img');
+  const all=g.title+' '+items.map(txt).join(' ');
+  const pls=Object.entries(PLANETS).filter(([k,v])=>v[2].test(all)).slice(0,4).map(([k,v])=>`<span class="tg">${v[0]} ${v[1]}</span>`).join('');
+  const first=items.slice(0,4).map(q=>itemHTML(q,sr)).join(''),rest=items.slice(4).map(q=>itemHTML(q,sr)).join('');
+  const gal=imgs.slice(0,6).map(q=>blockHTML(q,[]).replace('class="fig','class="fig '+(q.hi?'':'th ')+'')).join('');
+  o+=`<section class="res"><div class="rh"><span class="ico">${icoOf(g)}</span><div class="tt"><b>${esc(g.title)}</b><small>${esc(g.b.id==='b1'?'Encyclopaedia':'Remedies of Astrology')} · ${esc(g.c.title)}${g.page>0?' · p.'+g.page:''}</small></div></div>${pls?`<div class="tgs">${pls}</div>`:''}<div class="rb">${first}${rest?`<div class="extra" hidden>${rest}</div><button class="link mr" data-more="1">Show ${items.length-4} more</button>`:''}${gal?`<div class="gal">${gal}</div>`:''}</div><div class="rf"><button class="act sv" data-save="${g.id}">${sv.has(g.id)?'★ Saved':'☆ Save'}</button><button class="act" data-copy="${g.id}">Copy</button><button class="act" data-open="${g.id}">Book ↗</button></div></section>`});
+ o+='</div>';
  if(groups.length>SHOW)o+=`<button class="more" id="more">Show more (${groups.length-SHOW} sections left)</button>`;
  if(!groups.length)o+='<div class="empty"><span class="e">🪷</span>Nothing in this tab for your selection.<br>Try the “All” tab or remove a filter.</div>';
- const y=scrollY;$('#main').innerHTML=o;if(state.keepScroll){scrollTo(0,y);state.keepScroll=false}}
+ const y=scrollY;$('#main').innerHTML=o;hydrate();if(state.keepScroll){scrollTo(0,y);state.keepScroll=false}}
 /* ---------- READ ---------- */
 async function renderRead(){
  if(!loaded){$('#main').innerHTML='<div class="sk"></div><div class="sk"></div>';await loadAll()}
@@ -210,6 +242,7 @@ async function renderRead(){
  <div class="reader"><aside class="side" id="side"><h4>Chapters</h4>${b.chapters.map(x=>`<a class="${x.n===c.n?'on':''}" data-chap="${x.n}">${x.n?x.n+'. ':''}${esc(x.title)}</a>`).join('')}<h4>In this chapter</h4>${toc||'<a>—</a>'}</aside>
  <article class="art"><h2 class="ct">${c.n?c.n+'. ':''}${esc(c.title)}</h2><div class="meta">${esc(bname(b))}${pgs.length?' · pages '+pgs[0]+'–'+pgs[pgs.length-1]:''}</div>${d.blocks.map(q=>`<div id="b${q.i}">${blockHTML(q,[])}</div>`).join('')}
  <div class="pn"><button ${idx?'':'disabled'} data-chap="${idx?b.chapters[idx-1].n:''}">← ${idx?esc(b.chapters[idx-1].title):''}</button><button ${idx<b.chapters.length-1?'':'disabled'} data-chap="${idx<b.chapters.length-1?b.chapters[idx+1].n:''}">${idx<b.chapters.length-1?esc(b.chapters[idx+1].title):''} →</button></div></article></div>`;
+ hydrate();try{localStorage.setItem('last',JSON.stringify({b:b.id,c:c.n,t:c.title}))}catch(e){}
  if(state.jump!=null){const e=$('#b'+state.jump);if(e){e.scrollIntoView();e.firstElementChild&&(e.style.outline='2px solid var(--accent2)',setTimeout(()=>e.style.outline='',2200))}state.jump=null}else scrollTo(0,0)}
 /* ---------- SAVED ---------- */
 function renderSaved(){const s=saved();
@@ -221,13 +254,20 @@ function parseHash(){const h=decodeURIComponent(location.hash.slice(1));
  else{const p=new URLSearchParams(h.split('?')[1]||'');Object.assign(state,{view:'find',topic:p.get('topic'),planet:p.get('planet'),type:p.get('type'),q:p.get('q')||''});$('#q').value=state.q}}
 function hashFor(){if(state.view==='read')return '#read/'+state.book+'/'+(state.chap??'');if(state.view==='saved')return '#saved';
  const p=new URLSearchParams();['topic','planet','type'].forEach(k=>state[k]&&p.set(k,state[k]));state.q&&p.set('q',state.q);return '#find'+(p.toString()?'?'+p:'')}
-function render(){SHOW=25;$$('[data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v===state.view));
+function render(){SHOW=18;$$('[data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v===state.view));
  ({find:renderFind,read:renderRead,saved:renderSaved})[state.view]()}
 function nav(){const h=hashFor();if(location.hash===h)render();else location.hash=h}
 addEventListener('hashchange',()=>{parseHash();render()});
-document.addEventListener('click',e=>{const t=e.target.closest('[data-g],[data-tab],[data-combo],[data-tog],#colall,#share,[data-rm],[data-v],[data-book],[data-chap],[data-jump],[data-open],[data-copy],[data-copyS],[data-save],#dr,#clr,#more,#cb,#logo,#top,#cpall,#prt');if(!t)return;
+document.addEventListener('click',e=>{const t=e.target.closest('[data-g],[data-more],[data-cm],.it.clamp,img.fig,[data-last],#imgt,#fnt,[data-tab],[data-combo],[data-tog],#colall,#share,[data-rm],[data-v],[data-book],[data-chap],[data-jump],[data-open],[data-copy],[data-copyS],[data-save],#dr,#clr,#more,#cb,#logo,#top,#cpall,#prt');if(!t)return;
  const d=t.dataset;
- if(d.tab!==undefined){state.type=d.tab==='all'?null:d.tab;nav();scrollTo(0,0)}
+ if(d.more){const x=t.previousElementSibling;x.hidden=!x.hidden;t.textContent=x.hidden?'Show more':'Show less'}
+ else if(d.cm!==undefined){navigator.clipboard.writeText(d.cm).then(()=>toast('Mantra copied'))}
+ else if(t.classList.contains('clamp'))t.classList.toggle('open')
+ else if(t.tagName==='IMG'){if(!t.src||t.closest('.art'))return;const l=document.createElement('div');l.className='lbx';l.innerHTML='<img src="'+t.src+'">';l.onclick=()=>l.remove();document.body.append(l)}
+ else if(d.last){const l=JSON.parse(localStorage.getItem('last'));state.view='read';state.book=l.b;state.chap=l.c;nav()}
+ else if(t.id==='imgt'){document.body.classList.toggle('noimg');try{localStorage.setItem('noimg',document.body.classList.contains('noimg')?'1':'')}catch(e){}}
+ else if(t.id==='fnt'){document.body.classList.toggle('sans');try{localStorage.setItem('sans',document.body.classList.contains('sans')?'1':'')}catch(e){}}
+ else if(d.tab!==undefined){state.type=d.tab==='all'?null:d.tab;nav();scrollTo(0,0)}
  else if(d.combo){const[a,b,c]=d.combo.split('|');state.view='find';state.topic=a||null;state.planet=b||null;state.type=c||null;state.q='';$('#q').value='';nav();scrollTo(0,0)}
  else if(d.tog!==undefined)t.closest('.res').classList.toggle('col')
  else if(t.id==='colall'){const r=$$('.res'),c=r.some(x=>!x.classList.contains('col'));r.forEach(x=>x.classList.toggle('col',c))}
@@ -245,7 +285,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-g],[data-t
   if(state.view==='saved')renderSaved();else{t.textContent=i>=0?'☆ Save':'★ Saved'}}
  else if(t.id==='dr'){state.drawer=!state.drawer;state.keepScroll=true;renderFind()}
  else if(t.id==='clr'){state.topic=state.planet=state.type=null;state.q='';$('#q').value='';nav()}
- else if(t.id==='more'){SHOW+=25;state.keepScroll=true;renderFind()}
+ else if(t.id==='more'){SHOW+=18;state.keepScroll=true;renderFind()}
  else if(t.id==='cb')$('#side').classList.toggle('open')
  else if(t.id==='logo'){state.view='find';state.topic=state.planet=state.type=null;state.q='';$('#q').value='';nav();scrollTo(0,0)}
  else if(t.id==='top')scrollTo({top:0,behavior:'smooth'})
@@ -258,6 +298,8 @@ let fs=+localStorage.getItem('fs')||16;const setfs=v=>{fs=Math.max(12,Math.min(2
 $('#fm').onclick=()=>setfs(fs-1);$('#fp').onclick=()=>setfs(fs+1);
 $('#th').onclick=()=>{const r=document.documentElement,dk=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dk?'light':'dark';try{localStorage.setItem('theme',r.dataset.theme)}catch(e){}};
 try{const t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
+try{if(localStorage.getItem('noimg'))document.body.classList.add('noimg');if(localStorage.getItem('sans'))document.body.classList.add('sans')}catch(e){}
+if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
 setSaved(saved());parseHash();render();
 </script>
 </body>
